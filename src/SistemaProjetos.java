@@ -1,4 +1,6 @@
-import java.util.Scanner;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 
 public class SistemaProjetos {
 
@@ -11,7 +13,7 @@ public class SistemaProjetos {
     static String[] status = new String[MAX];
     static int qtd = 0;
     static int proximoId = 1;
-    static Scanner sc = new Scanner(System.in);
+    static BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
     public static void main(String[] args) {
         int op;
@@ -147,7 +149,13 @@ public class SistemaProjetos {
 
     static String lerStr(String prompt) {
         System.out.print(prompt);
-        return sc.nextLine().trim();
+        try {
+            String linha = br.readLine();
+            return linha == null ? "" : linha.trim();
+        } catch (IOException e) {
+            System.out.println("Erro de leitura.");
+            return "";
+        }
     }
 
     static int lerInt(String prompt) {
